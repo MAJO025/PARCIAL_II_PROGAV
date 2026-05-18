@@ -1,4 +1,4 @@
-from Parcial_II import Country
+from Country import Country
 import requests
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -7,18 +7,18 @@ from requests.exceptions import HTTPError, ConnectionError, Timeout
 BASE = "https://restcountries.com/v3.1"
 
 class CountryAPI:
-    def by_name(self, name: str):
-        url = f"{BASE}/name/{name}"
+    def por_nombre(self, nombre: str):
+        url = f"{BASE}/name/{nombre}"
         try:
             r = requests.get(url, timeout=5)
             r.raise_for_status()
             return Country(r.json()[0])
         except Timeout:
-            print(f"Tardó demasiado: {name}")
+            print(f"Tardó demasiado: {nombre}")
         except ConnectionError:
             print("Sin conexión")
         except HTTPError as e:
-            print(f" {name} no encontrado ({e.response.status_code})")
+            print(f" {nombre} no encontrado ({e.response.status_code})")
         return None
 
     def by_names_concurrente(self, nombres: list) -> list:
@@ -27,7 +27,7 @@ class CountryAPI:
         inicio = time.time()
 
         with ThreadPoolExecutor(max_workers=5) as pool:
-            futuros = {pool.submit(self.by_name, n): n for n in nombres}
+            futuros = {pool.submit(self.por_nombre, n): n for n in nombres}
             for f in as_completed(futuros):
                 pais = f.result()
                 if pais:
