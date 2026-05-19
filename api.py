@@ -26,7 +26,7 @@ class CountryAPI:
 
         inicio = time.time()
 
-        with ThreadPoolExecutor(max_workers=5) as pool:
+        with ThreadPoolExecutor(max_workers=6) as pool:
             futuros = {pool.submit(self.por_nombre, n): n for n in nombres}
             for f in as_completed(futuros):
                 pais = f.result()
