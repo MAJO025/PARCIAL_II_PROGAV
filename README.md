@@ -12,6 +12,8 @@ María → M · A · R · I · A
 | I | India |
 | A | Australia *(A repetida → país distinto)* |
 
+---
+
 Emmanuel → E · M · M · A · N · U · E · L
 | Letra | País |
 |-------|------|
